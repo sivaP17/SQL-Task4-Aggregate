@@ -1,0 +1,35 @@
+CREATE TABLE Sales (
+    id INTEGER PRIMARY KEY,
+    customer_name TEXT,
+    product TEXT,
+    quantity INTEGER,
+    price REAL,
+    region TEXT
+);
+
+INSERT INTO Sales (customer_name, product, quantity, price, region) VALUES
+('John', 'Pen', 10, 5.00, 'North'),
+('Alice', 'Pencil', 15, 2.00, 'South'),
+('Bob', 'Notebook', 5, 20.00, 'North'),
+('John', 'Pencil', 8, 2.00, 'East'),
+('Alice', 'Pen', 12, 5.00, 'West'),
+('Bob', 'Notebook', 3, 20.00, 'South'),
+('Daisy', 'Pen', 6, 5.00, 'North'),
+('Daisy', 'Notebook', 2, 20.00, 'West');
+
+SELECT SUM(quantity * price) AS total_sales FROM Sales;
+SELECT AVG(quantity) AS average_quantity FROM Sales;
+SELECT region, SUM(quantity * price) AS total_sales
+FROM Sales
+GROUP BY region;
+SELECT customer_name, COUNT(*) AS total_orders
+FROM Sales
+GROUP BY customer_name;
+SELECT product, AVG(quantity) AS avg_quantity
+FROM Sales
+GROUP BY product;
+SELECT region, SUM(quantity * price) AS total_sales
+FROM Sales
+GROUP BY region
+HAVING total_sales > 100;
+
